@@ -5,12 +5,6 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions';
 
 class PostsNew extends Component {
-	constructor(props) {
-		super(props);
-
-		this.onSubmit = this.onSubmit.bind(this);
-	}
-
 	renderField(field) {
 		const { meta: { touched, error } } = field;
 		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
@@ -30,7 +24,7 @@ class PostsNew extends Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-			<form onSubmit={handleSubmit(this.onSubmit)}>
+			<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				<Field name="title" label="Title" component={this.renderField} />
 				<Field name="categories" label="Category" component={this.renderField} />
 				<Field name="content" label="Content" component={this.renderField} />
@@ -48,15 +42,14 @@ class PostsNew extends Component {
 function validate(values) {
 	const errors = {};
 	if (!values.title) {
-		errors.title = 'Enter a title!';
+		errors.title = 'Enter title!';
 	}
 	if (!values.categories) {
 		errors.categories = 'Enter categories!';
 	}
 	if (!values.content) {
-		errors.content = 'Enter a content!';
+		errors.content = 'Enter content!';
 	}
-
 	return errors;
 }
 

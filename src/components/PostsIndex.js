@@ -27,15 +27,15 @@ class PostsIndex extends Component {
 						Add Post
 					</Link>
 				</div>
-				<h3>Posts</h3>
+				<h2>Posts</h2>
 				<ul className="list-group">{this.renderPosts()}</ul>
 			</div>
 		);
 	}
 }
 
-function mapStateToProps(state) {
-	return { posts: state.posts };
+function mapStateToProps({ posts }) {
+	return { posts };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
