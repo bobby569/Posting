@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPost, deletePost } from '../actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Chip from 'material-ui/Chip';
+
+const styles = {
+	chip: {
+		margin: 'auto'
+	},
+	wrapper: {
+		display: 'flex',
+		flexWrap: 'wrap'
+	}
+};
 
 class PostsShow extends Component {
-	constructor(props) {
-		super(props);
-
-		this.onDeleteClick = this.onDeleteClick.bind(this);
-	}
-
 	componentDidMount() {
 		const { id } = this.props.match.params;
 		this.props.fetchPost(id);
@@ -21,19 +27,32 @@ class PostsShow extends Component {
 	}
 
 	render() {
-		const { post } = this.props;
-		if (!post) {
+		if (!this.props.post) {
 			return <div>Loading...</div>;
 		}
+		const { post: { title, categories, content } } = this.props;
 		return (
 			<div>
-				<Link to="/">Back</Link>
-				<button className="btn btn-danger pull-xs-right" onClick={this.onDeleteClick}>
+				<Link to="/">
+					<button className="btn btn-primary pull-xs">Back</button>
+				</Link>
+				<button
+					className="btn btn-danger pull-xs-right"
+					onClick={this.onDeleteClick.bind(this)}
+				>
 					Delete Post
 				</button>
-				<h3>{post.title}</h3>
-				<h6>Category: {post.categories}</h6>
-				<p>{post.content}</p>
+				<div className="content">
+					<h2>{title}</h2>
+					<div>
+						<MuiThemeProvider style={styles.wrapper}>
+							<Chip style={styles.chip}>{categories}</Chip>
+						</MuiThemeProvider>
+					</div>
+					<div>
+						<p>{content}</p>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -1,3 +1,32 @@
 form a {
 	margin-left: 5px;
 }
+
+body {
+	height: 100%;
+}
+
+h2 {
+	text-align: center;
+	margin: 10px;
+}
+
+div {
+	margin: 10px;
+}
+
+div.content {
+	margin: 10px auto;
+	padding: 10px;
+	height: 100%;
+	background-color: #eff4fc;
+}
+
+div.content div {
+	width: 85%;
+	margin: 10px auto;
+}
+
+.list-group-item:hover {
+	background-color: lightgrey;
+}
