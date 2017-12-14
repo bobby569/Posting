@@ -29,4 +29,5 @@ div.content div {
 
 .list-group-item:hover {
 	background-color: lightgrey;
+	transition: 500ms;
 }

@@ -2,18 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPost, deletePost } from '../actions';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Chip from 'material-ui/Chip';
-
-const styles = {
-	chip: {
-		margin: 'auto'
-	},
-	wrapper: {
-		display: 'flex',
-		flexWrap: 'wrap'
-	}
-};
+import PostContent from './PostContent';
 
 class PostsShow extends Component {
 	componentDidMount() {
@@ -27,10 +16,10 @@ class PostsShow extends Component {
 	}
 
 	render() {
-		if (!this.props.post) {
+		const { post } = this.props;
+		if (!post) {
 			return <div>Loading...</div>;
 		}
-		const { post: { title, categories, content } } = this.props;
 		return (
 			<div>
 				<Link to="/">
@@ -42,17 +31,7 @@ class PostsShow extends Component {
 				>
 					Delete Post
 				</button>
-				<div className="content">
-					<h2>{title}</h2>
-					<div>
-						<MuiThemeProvider style={styles.wrapper}>
-							<Chip style={styles.chip}>{categories}</Chip>
-						</MuiThemeProvider>
-					</div>
-					<div>
-						<p>{content}</p>
-					</div>
-				</div>
+				<PostContent post={post} />
 			</div>
 		);
 	}
