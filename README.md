@@ -1,7 +1,3 @@
-# Posting
-
-Web Application supporting post and delete function
-
 ## Posting
 
-Posting web application supporting add and delete functionality built with React, Redux and Redux-form
+Web Application supporting post related functionality, including CREATE, READ, and DELETE built with React, Redux and Redux-form.
