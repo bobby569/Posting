@@ -12,12 +12,18 @@ module.exports = {
     publicPath: "/",
     filename: "[name].js"
   },
+  mode: "development",
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: "babel-loader",
-        exclude: /node_modules/
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
+        }
       },
       {
         test: /\.css$/,
@@ -45,6 +51,7 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === "production") {
+  module.exports.mode = "production";
   module.exports.devtool = "#source-map";
   module.exports.output.publicPath = "./";
   module.exports.plugins = (module.exports.plugins || []).concat([
